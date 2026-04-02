@@ -86,6 +86,7 @@ def get_connection():
         warehouse=st.secrets["snowflake"]["warehouse"],
         database=st.secrets["snowflake"]["database"],
         schema=st.secrets["snowflake"]["schema"],
+        role="streamlit_role",
         private_key=private_key.private_bytes(
             serialization.Encoding.DER,
             serialization.PrivateFormat.PKCS8,
