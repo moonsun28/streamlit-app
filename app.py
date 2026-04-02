@@ -6,8 +6,8 @@ import base64
 st.title("Cosense App 🚀")
 
 try:
-    private_key_bytes = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
-    private_key = serialization.load_der_private_key(private_key_bytes, password=None)
+    private_key_pem = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
+    private_key = serialization.load_pem_private_key(private_key_pem, password=None)
 
     conn = snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
