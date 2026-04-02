@@ -6,8 +6,6 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import snowflake.connector
-from cryptography.hazmat.primitives import serialization
-import base64
 import re
 
 # ── 브랜드 컬러 ────────────────────────────────────────────────────
@@ -78,20 +76,14 @@ st.markdown(f"""
 # ── Snowflake 연결 ────────────────────────────────────────────────
 @st.cache_resource
 def get_connection():
-    private_key_pem = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
-    private_key = serialization.load_pem_private_key(private_key_pem, password=None)
     return snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
+        password=st.secrets["snowflake"]["password"],
         account=st.secrets["snowflake"]["account"],
         warehouse=st.secrets["snowflake"]["warehouse"],
         database=st.secrets["snowflake"]["database"],
         schema=st.secrets["snowflake"]["schema"],
-        role="streamlit_role",
-        private_key=private_key.private_bytes(
-            serialization.Encoding.DER,
-            serialization.PrivateFormat.PKCS8,
-            serialization.NoEncryption()
-        )
+        role=st.secrets["snowflake"]["role"],
     )
 
 def run_query(query):
