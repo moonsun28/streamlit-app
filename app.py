@@ -141,7 +141,8 @@ def load_demand_signal():
         FROM COSENSE_DB.ANALYTICS.DEMAND_SIGNAL
         ORDER BY GU, DONG, BASE_YM
     """)
-
+st.write(st.secrets["snowflake"]["role"])
+st.write(st.secrets["snowflake"]["user"])
 with st.spinner("데이터 로딩 중..."):
     df_result   = load_result()
     df_rent     = load_rent_demand()
