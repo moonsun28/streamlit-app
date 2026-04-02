@@ -13,8 +13,7 @@ conn = snowflake.connector.connect(
     schema=st.secrets["snowflake"]["schema"]
 )
 
-query = "SELECT * FROM COSENSE_DB.ANALYTICS.YOUR_TABLE LIMIT 10"
-
+query = "SELECT * FROM COSENSE_DB.ANALYTICS.DEMAND_SIGNAL LIMIT 10"
 df = pd.read_sql(query, conn)
 
 st.dataframe(df)
