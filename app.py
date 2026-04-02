@@ -9,7 +9,6 @@ try:
         st.secrets["snowflake"]["private_key"].encode(),
         password=None
     )
-
     conn = snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
         account=st.secrets["snowflake"]["account"],
@@ -25,8 +24,3 @@ try:
     st.success("Snowflake 연결 성공")
 except Exception as e:
     st.exception(e)
-```
-
-## 4. requirements.txt 에 추가
-```
-cryptography
