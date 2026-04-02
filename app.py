@@ -1,15 +1,14 @@
 import streamlit as st
 import snowflake.connector
 from cryptography.hazmat.primitives import serialization
+import base64
 
 st.title("Cosense App 🚀")
 
 try:
-    private_key_str = st.secrets["snowflake"]["private_key"]
-    private_key = serialization.load_pem_private_key(
-        private_key_str.encode("utf-8"),
-        password=None
-    )
+    private_key_bytes = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
+    private_key = serialization.load_der_private_key(private_key_bytes, password=None)
+
     conn = snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
         account=st.secrets["snowflake"]["account"],
