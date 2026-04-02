@@ -76,8 +76,6 @@ st.markdown(f"""
 # ── Snowflake 연결 ────────────────────────────────────────────────
 @st.cache_resource
 def get_connection():
-@st.cache_resource
-def get_connection():
     import base64
     from cryptography.hazmat.primitives import serialization
     private_key_pem = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
