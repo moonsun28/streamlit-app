@@ -75,13 +75,12 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ── Snowflake 연결 ────────────────────────────────────────────────
-# @st.cache_resource
-def get_connection():
+def run_query(query):
     import base64
     from cryptography.hazmat.primitives import serialization
     private_key_pem = base64.b64decode(st.secrets["snowflake"]["private_key_base64"])
     private_key = serialization.load_pem_private_key(private_key_pem, password=None)
-    return snowflake.connector.connect(
+    conn = snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
         account=st.secrets["snowflake"]["account"],
         warehouse=st.secrets["snowflake"]["warehouse"],
@@ -94,8 +93,6 @@ def get_connection():
             serialization.NoEncryption()
         )
     )
-def run_query(query):
-    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(query)
     return cursor.fetch_pandas_all()
