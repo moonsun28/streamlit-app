@@ -1,4 +1,3 @@
-
 import streamlit as st
 import snowflake.connector
 
@@ -9,7 +8,6 @@ try:
         user=st.secrets["snowflake"]["user"],
         password=st.secrets["snowflake"]["password"],
         account=st.secrets["snowflake"]["account"],
-        host=st.secrets["snowflake"]["host"],
         warehouse=st.secrets["snowflake"]["warehouse"],
         database=st.secrets["snowflake"]["database"],
         schema=st.secrets["snowflake"]["schema"],
@@ -17,4 +15,3 @@ try:
     st.success("Snowflake 연결 성공")
 except Exception as e:
     st.exception(e)
-    
