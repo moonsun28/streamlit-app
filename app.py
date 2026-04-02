@@ -75,7 +75,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ── Snowflake 연결 ────────────────────────────────────────────────
-@st.cache_resource
+# @st.cache_resource
 def get_connection():
     import base64
     from cryptography.hazmat.primitives import serialization
